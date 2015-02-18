@@ -81,9 +81,9 @@ function googleanalytics_menu() {
 }
 
 /**
- * Implements hook_page_alter() to insert JavaScript to the appropriate scope/region of the page.
+ * Implements hook_init() to insert JavaScript to the appropriate scope/region of the page.
  */
-function googleanalytics_page_alter(&$page) {
+function googleanalytics_init() {
   global $user;
   $config = config('googleanalytics.settings');
 
