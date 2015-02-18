@@ -81,9 +81,9 @@ function googleanalytics_menu() {
 }
 
 /**
- * Implements hook_page_alter() to insert JavaScript to the appropriate scope/region of the page.
+ * Implements hook_init() to insert JavaScript to the appropriate scope/region of the page.
  */
-function googleanalytics_page_alter(&$page) {
+function googleanalytics_init() {
   global $user;
   $config = config('googleanalytics.settings');
 
@@ -428,6 +428,7 @@ function googleanalytics_user_presave(&$edit, $account, $category) {
  * Implements hook_cron().
  */
 function googleanalytics_cron() {
+  $config = config('googleanalytics.settings');
   // Regenerate the tracking code file every day.
   if (REQUEST_TIME - $config->get('last_cache') >= 86400 && $config->get('cache')) {
     _googleanalytics_cache('http://www.google-analytics.com/analytics.js', TRUE);
@@ -547,6 +548,7 @@ function googleanalytics_clear_js_cache() {
 function _googleanalytics_visibility_user($account) {
 
   $enabled = FALSE;
+  $config = config('googleanalytics.settings');
 
   // Is current user a member of a role that should be tracked?
   if (_googleanalytics_visibility_header($account) && _googleanalytics_visibility_roles($account)) {
@@ -575,6 +577,7 @@ function _googleanalytics_visibility_user($account) {
  */
 function _googleanalytics_visibility_roles($account) {
 
+  $config = config('googleanalytics.settings');
   $visibility = $config->get('visibility_roles');
   $enabled = $visibility;
   $roles = $config->get('roles');

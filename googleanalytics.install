@@ -111,3 +111,10 @@ function googleanalytics_update_1001() {
   update_variable_del('googleanalytics_codesnippet_after');
   update_variable_del('googleanalytics_debug');
 }
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function googleanalytics_update_last_removed() {
+  return 7205;
+}
