@@ -430,6 +430,7 @@ function googleanalytics_user_presave($account) {
  * Implements hook_cron().
  */
 function googleanalytics_cron() {
+  $config = config('googleanalytics.settings');
   // Regenerate the tracking code file every day.
   if (REQUEST_TIME - state_get('googleanalytics_last_cache', 0) >= 86400 && config_get('googleanalytics.settings', 'cache')) {
     _googleanalytics_cache('http://www.google-analytics.com/analytics.js', TRUE);
@@ -549,6 +550,7 @@ function googleanalytics_clear_js_cache() {
 function _googleanalytics_visibility_user($account) {
 
   $enabled = FALSE;
+  $config = config('googleanalytics.settings');
 
   // Is current user a member of a role that should be tracked?
   if (_googleanalytics_visibility_header($account) && _googleanalytics_visibility_roles($account)) {
