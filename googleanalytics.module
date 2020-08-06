@@ -86,6 +86,20 @@ function googleanalytics_menu() {
 }
 
 /**
+ * Implements hook_preprocess_page().
+ *
+ * Adds a link tag to preconnect to google.
+ */
+function googleanalytics_preprocess_page(&$variables) {
+  $attributes = array(
+    'rel' => 'preconnect',
+    'href' => 'https://www.google-analytics.com',
+    'crossorigin' => 'crossorigin',
+  );
+  backdrop_add_html_head_link($attributes);
+}
+
+/**
  * Implements hook_preprocess_layout().
  *
  * Insert JavaScript to the appropriate scope/region of the page.
@@ -385,7 +399,7 @@ function googleanalytics_preprocess_layout() {
  *   User id hash.
  */
 function google_analytics_user_id_hash($uid) {
-  return backdrop_hmac_base64($uid, backdrop_get_private_key() . backdrop_get_hash_salt());
+  return backdrop_hmac_base64($uid, drupal_get_private_key() . drupal_get_hash_salt());
 }
 
 /**
