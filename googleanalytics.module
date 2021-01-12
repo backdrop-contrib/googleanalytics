@@ -285,10 +285,7 @@ function googleanalytics_preprocess_layout() {
 
     // Track logged in users across all devices.
     if ($config->get('trackuserid') && user_is_logged_in()) {
-      // The USER_ID value should be a unique, persistent, and non-personally
-      // identifiable string identifier that represents a user or signed-in
-      // account across devices.
-      $create_only_fields['userId'] = backdrop_hmac_base64($user->uid, backdrop_get_private_key() . backdrop_get_hash_salt());
+      $create_only_fields['userId'] = google_analytics_user_id_hash($account->id());
     }
 
     // Create a tracker.
@@ -348,6 +345,23 @@ function googleanalytics_preprocess_layout() {
 
     backdrop_add_js($script, array('scope' => 'header', 'type' => 'inline'));
   }
+}
+
+/**
+ * Generate user id hash to implement USER_ID.
+ *
+ * The USER_ID value should be a unique, persistent, and non-personally
+ * identifiable string identifier that represents a user or signed-in
+ * account across devices.
+ *
+ * @param int $uid
+ *   User id.
+ *
+ * @return string
+ *   User id hash.
+ */
+function google_analytics_user_id_hash($uid) {
+  return Crypt::hmacBase64($uid, \Drupal::service('private_key')->get() . Settings::getHashSalt());
 }
 
 /**
