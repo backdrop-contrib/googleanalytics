@@ -70,6 +70,12 @@ Backdrop.behaviors.trackingSettingsSummary = {
       if ($('input#edit-googleanalytics-trackcolorbox', context).is(':checked')) {
         vals.push(Backdrop.t('Colorbox'));
       }
+      if ($('input#edit-googleanalytics-tracklinkid', context).is(':checked')) {
+        vals.push(Backdrop.t('Link attribution'));
+      }
+      if ($('input#edit-googleanalytics-trackurlfragments', context).is(':checked')) {
+        vals.push(Backdrop.t('URL fragments'));
+      }
       if (!vals.length) {
         return Backdrop.t('Not tracked');
       }
