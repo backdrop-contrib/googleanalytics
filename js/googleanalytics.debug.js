@@ -27,12 +27,22 @@ $(document).ready(function() {
         else if (Backdrop.settings.googleanalytics.trackDownload && Backdrop.googleanalytics.isDownload(this.href)) {
           // Download link clicked.
           console.info("Download url '%s' has been found. Tracked download as extension '%s'.", Backdrop.googleanalytics.getPageUrl(this.href), Backdrop.googleanalytics.getDownloadExtension(this.href).toUpperCase());
-          ga("send", "event", "Downloads", Backdrop.googleanalytics.getDownloadExtension(this.href).toUpperCase(), Backdrop.googleanalytics.getPageUrl(this.href));
+          ga("send", {
+            "hitType": "event",
+            "eventCategory": "Downloads",
+            "eventAction": Backdrop.googleanalytics.getDownloadExtension(this.href).toUpperCase(),
+            "eventLabel": Backdrop.googleanalytics.getPageUrl(this.href),
+            "transport": "beacon"
+          });
         }
         else if (Backdrop.googleanalytics.isInternalSpecial(this.href)) {
           // Keep the internal URL for Google Analytics website overlay intact.
           console.info("Click on internal special link '%s' has been tracked.", Backdrop.googleanalytics.getPageUrl(this.href));
-          ga("send", "pageview", { "page": Backdrop.googleanalytics.getPageUrl(this.href) });
+          ga("send", {
+            "hitType": "pageview",
+            "page": Backdrop.googleanalytics.getPageUrl(this.href),
+            "transport": "beacon"
+          });
         }
         else {
           // e.g. anchor in same page or other internal page link
@@ -43,13 +53,25 @@ $(document).ready(function() {
         if (Backdrop.settings.googleanalytics.trackMailto && $(this).is("a[href^='mailto:'],area[href^='mailto:']")) {
           // Mailto link clicked.
           console.info("Click on e-mail '%s' has been tracked.", this.href.substring(7));
-          ga("send", "event", "Mails", "Click", this.href.substring(7));
+          ga("send", {
+            "hitType": "event",
+            "eventCategory": "Mails",
+            "eventAction": "Click",
+            "eventLabel": this.href.substring(7),
+            "transport": "beacon"
+          });
         }
         else if (Backdrop.settings.googleanalytics.trackOutbound && this.href.match(/^\w+:\/\//i)) {
-          if (Backdrop.settings.googleanalytics.trackDomainMode != 2 || (Backdrop.settings.googleanalytics.trackDomainMode == 2 && !Backdrop.googleanalytics.isCrossDomain(this.hostname, Backdrop.settings.googleanalytics.trackCrossDomains))) {
+          if (Backdrop.settings.googleanalytics.trackDomainMode !== 2 || (Backdrop.settings.googleanalytics.trackDomainMode === 2 && !Backdrop.googleanalytics.isCrossDomain(this.hostname, Backdrop.settings.googleanalytics.trackCrossDomains))) {
             // External link clicked / No top-level cross domain clicked.
             console.info("Outbound link '%s' has been tracked.", this.href);
-            ga("send", "event", "Outbound links", "Click", this.href);
+            ga("send", {
+              "hitType": "event",
+              "eventCategory": "Outbound links",
+              "eventAction": "Click",
+              "eventLabel": this.href,
+              "transport": "beacon"
+            });
           }
           else {
             console.info("Internal link '%s' clicked, not tracked.", this.href);
@@ -65,8 +87,11 @@ $(document).ready(function() {
   if (Backdrop.settings.googleanalytics.trackUrlFragments) {
     window.onhashchange = function() {
       console.info("Track URL '%s' as pageview. Hash '%s' has changed.", location.pathname + location.search + location.hash, location.hash);
-      ga('send', 'pageview', location.pathname + location.search + location.hash);
-    }
+      ga("send", {
+        "hitType": "pageview",
+        "page": location.pathname + location.search + location.hash
+      });
+    };
   }
 
   // Colorbox: This event triggers when the transition has completed and the
