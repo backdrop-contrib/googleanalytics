@@ -118,6 +118,9 @@ function googleanalytics_preprocess_layout() {
       $link_settings['trackDownload'] = $track_download;
       $link_settings['trackDownloadExtensions'] = $trackfiles_extensions;
     }
+    if (module_exists('colorbox') && ($track_colorbox = $config->get('trackcolorbox'))) {
+      $link_settings['trackColorbox'] = $track_colorbox;
+    }
     if ($track_domain_mode = $config->get('domain_mode')) {
       $link_settings['trackDomainMode'] = $track_domain_mode;
     }

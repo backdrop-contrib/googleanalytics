@@ -67,6 +67,9 @@ Backdrop.behaviors.trackingSettingsSummary = {
       if ($('input#edit-googleanalytics-trackfiles', context).is(':checked')) {
         vals.push(Backdrop.t('Downloads'));
       }
+      if ($('input#edit-googleanalytics-trackcolorbox', context).is(':checked')) {
+        vals.push(Backdrop.t('Colorbox'));
+      }
       if (!vals.length) {
         return Backdrop.t('Not tracked');
       }

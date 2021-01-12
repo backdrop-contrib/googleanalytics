@@ -208,6 +208,20 @@ function googleanalytics_admin_settings_form($form_state) {
       ),
     ),
   );
+
+  $colorbox_dependencies = '<div class="admin-requirements">';
+  $colorbox_dependencies .= t('Requires: !module-list', array(
+    '!module-list' => (module_exists('colorbox') ? t('@module (<span class="admin-enabled">enabled</span>)', array('@module' => 'Colorbox')) : t('@module (<span class="admin-disabled">disabled</span>)', array('@module' => 'Colorbox'))),
+    ));
+  $colorbox_dependencies .= '</div>';
+
+  $form['tracking']['linktracking']['googleanalytics_trackcolorbox'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Track content in colorbox modal dialogs'),
+    '#default_value' => $config->get('trackcolorbox'),
+    '#description' => t('Enable to track the content shown in colorbox modal windows.') . $colorbox_dependencies,
+    '#disabled' => (module_exists('colorbox') ? FALSE : TRUE),
+  );
   $form['tracking']['linktracking']['googleanalytics_tracklinkid'] = array(
     '#type' => 'checkbox',
     '#title' => t('Track enhanced link attribution'),
