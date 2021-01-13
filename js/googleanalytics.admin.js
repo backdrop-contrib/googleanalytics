@@ -124,17 +124,27 @@ Backdrop.behaviors.trackingSettingsSummary = {
     });
 
     $('fieldset#edit-privacy', context).backdropSetSummary(function (context) {
-      var vals = [];
+      var enabled = [];
+      var summaryItems = [];
       if ($('input#edit-googleanalytics-tracker-anonymizeip', context).is(':checked')) {
-        vals.push(Backdrop.t('Anonymize IP'));
+        enabled.push(Backdrop.t('Anonymize IP'));
       }
       if ($('input#edit-googleanalytics-privacy-donottrack', context).is(':checked')) {
-        vals.push(Backdrop.t('Universal web tracking opt-out'));
+        enabled.push(Backdrop.t('Universal web tracking opt-out'));
       }
-      if (!vals.length) {
+      if ($('input#edit-googleanalytics-disable-cookies', context).is(':checked')) {
+        summaryItems.push(Backdrop.t('Cookies disabled'));
+      }
+      if (!enabled.length && !summaryItems.length) {
         return Backdrop.t('No privacy');
       }
-      return Backdrop.t('@items enabled', {'@items' : vals.join(', ')});
+      if (summaryItems.length) {
+        summaryItems.unshift(Backdrop.t('@items enabled', {'@items' : enabled.join(', ')}));
+      }
+      else {
+        return Backdrop.t('@items enabled', {'@items' : enabled.join(', ')});
+      }
+      return summaryItems.join(', ');
     });
   }
 };

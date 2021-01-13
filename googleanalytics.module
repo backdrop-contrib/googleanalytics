@@ -290,6 +290,11 @@ function googleanalytics_preprocess_layout() {
       $googleanalytics_adsense_script .= 'window.google_analytics_domain_name = "none";';
     }
 
+    // Disable cookies.
+    if ($config->get('disable_cookies')) {
+      $create_only_fields['storage'] = 'none';
+    }
+
     // Track logged in users across all devices.
     if ($config->get('trackuserid') && user_is_logged_in()) {
       $create_only_fields['userId'] = google_analytics_user_id_hash($account->id());

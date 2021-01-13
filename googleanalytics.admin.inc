@@ -310,6 +310,11 @@ function googleanalytics_admin_settings_form($form_state) {
     '#tree' => TRUE,
     '#type' => 'fieldset',
   );
+  $form['tracking']['privacy']['googleanalytics_disable_cookies'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable cookies'),
+    '#default_value' => $config->get('disable_cookies'),
+  );
 
   $googleanalytics_custom_dimension = $config->get('custom_dimension');
 

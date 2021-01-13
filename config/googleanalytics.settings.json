@@ -27,6 +27,7 @@
     "trackdoubleclick": false,
     "tracker_anonymizeip": true,
     "privacy_donottrack": false,
+    "disable_cookies": false,
     "custom_dimension": [],
     "custom_metric": [],
     "cache": false,
