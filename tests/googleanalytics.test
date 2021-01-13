@@ -20,6 +20,7 @@ class GoogleAnalyticsBasicTest extends BackdropWebTestCase {
       'administer google analytics',
       'administer modules',
       'administer site configuration',
+      'access site reports',
     );
 
     // User to set up google_analytics.
@@ -289,7 +290,7 @@ class GoogleAnalyticsBasicTest extends BackdropWebTestCase {
 
 class GoogleAnalyticsCustomDimensionsAndMetricsTest extends BackdropWebTestCase {
   function setUp() {
-    parent::setUp('googleanalytics', 'token');
+    parent::setUp('googleanalytics');
 
     $permissions = array(
       'access administration pages',
@@ -481,7 +482,7 @@ class GoogleAnalyticsCustomUrls extends BackdropWebTestCase {
   public function testGoogleAnalyticsUserPasswordPage() {
     $base_path = base_path();
     $ua_code = 'UA-123456-4';
-    variable_set('googleanalytics_account', $ua_code);
+    config_set('googleanalytics.settings', 'account', $ua_code);
 
     $this->backdropGet('user/password', ['query' => ['name' => 'foo']]);
     $this->assertRaw('ga("set", "page", "' . $base_path . 'user/password"');
@@ -516,7 +517,7 @@ class GoogleAnalyticsStatusMessagesTest extends BackdropWebTestCase {
     config_set('googleanalytics.settings', 'trackmessages', array('error' => 'error'));
 
     $this->backdropPost('user/login', array(), t('Log in'));
-    $this->assertRaw('ga("send", "event", "Messages", "Error message", "Username field is required.");', '[testGoogleAnalyticsStatusMessages]: Event message "Username field is required." is shown.');
+    $this->assertRaw('ga("send", "event", "Messages", "Error message", "Username or email field is required.");', '[testGoogleAnalyticsStatusMessages]: Event message "Username field is required." is shown.');
     $this->assertRaw('ga("send", "event", "Messages", "Error message", "Password field is required.");', '[testGoogleAnalyticsStatusMessages]: Event message "Password field is required." is shown.');
 
     // @todo: investigate why backdrop_set_message() fails.
@@ -663,7 +664,7 @@ class GoogleAnalyticsSearchTest extends BackdropWebTestCase {
 
     // Save the node.
     $this->backdropPost('node/add/page', $edit, t('Save'));
-    $this->assertText(t('@type @title has been created.', array('@type' => 'Basic page', '@title' => $edit['title'])), 'Node was created.');
+    $this->assertText(t('@type @title has been created.', array('@type' => 'Page', '@title' => $edit['title'])), 'Node was created.');
 
     // Index the node or it cannot found.
     $this->cronRun();
@@ -673,7 +674,7 @@ class GoogleAnalyticsSearchTest extends BackdropWebTestCase {
     $this->assertRaw('window.googleanalytics_search_results = 1;', '[testGoogleAnalyticsSearch]: One search result found.');
 
     $this->backdropPost('node/add/page', $edit, t('Save'));
-    $this->assertText(t('@type @title has been created.', array('@type' => 'Basic page', '@title' => $edit['title'])), 'Node was created.');
+    $this->assertText(t('@type @title has been created.', array('@type' => 'Page', '@title' => $edit['title'])), 'Node was created.');
 
     // Index the node or it cannot found.
     $this->cronRun();

@@ -309,7 +309,7 @@ function googleanalytics_preprocess_layout() {
 
     // Track logged in users across all devices.
     if ($config->get('trackuserid') && user_is_logged_in()) {
-      $create_only_fields['userId'] = google_analytics_user_id_hash($account->id());
+      $create_only_fields['userId'] = google_analytics_user_id_hash($user->uid);
     }
 
     // Create a tracker.
