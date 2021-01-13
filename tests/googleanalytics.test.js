@@ -77,7 +77,7 @@ $(document).ready(function() {
   Backdrop.googleanalytics.test.assertTrue(Backdrop.googleanalytics.isInternal(base_url + Backdrop.settings.basePath + 'node/1?foo=bar'), "Link '" + base_url + Backdrop.settings.basePath + "node/1?foo=bar' has been detected as internal link.");
   Backdrop.googleanalytics.test.assertTrue(Backdrop.googleanalytics.isInternal(base_url + Backdrop.settings.basePath + 'node/1?foo=bar#foo'), "Link '" + base_url + Backdrop.settings.basePath + "node/1?foo=bar#foo' has been detected as internal link.");
   Backdrop.googleanalytics.test.assertTrue(Backdrop.googleanalytics.isInternal(base_url + Backdrop.settings.basePath + 'go/foo'), "Link '" + base_url + Backdrop.settings.basePath + "go/foo' has been detected as internal link.");
-  Backdrop.googleanalytics.test.assertFalse(Backdrop.googleanalytics.isInternal('http://example.com/node/3'), "Link 'http://example.com/node/3' has been detected as external link.");
+  Backdrop.googleanalytics.test.assertFalse(Backdrop.googleanalytics.isInternal('https://example.com/node/3'), "Link 'https://example.com/node/3' has been detected as external link.");
   console.groupEnd();
 
   console.group("Test 'isInternalSpecial':");
@@ -90,7 +90,7 @@ $(document).ready(function() {
   Backdrop.google_analytics.test.assertSame(base_path, Backdrop.google_analytics.getPageUrl(base_path), "Absolute internal URL '" + base_path + "' has been extracted from absolute url '" + base_path + "'.");
   //Backdrop.googleanalytics.test.assertSame(base_path, Backdrop.googleanalytics.getPageUrl(base_url + Backdrop.settings.basePath + 'node/1'), "Absolute internal URL '" +  Backdrop.settings.basePath + "node/1' has been extracted from full qualified url '" + base_url + base_path + "'.");
   //Backdrop.googleanalytics.test.assertSame(base_path, Backdrop.googleanalytics.getPageUrl(Backdrop.settings.basePath + 'node/1'), "Absolute internal URL '" +  Backdrop.settings.basePath + "node/1' has been extracted from absolute url '" +  base_path + "'.");
-  Backdrop.googleanalytics.test.assertSame('http://example.com/node/2', Backdrop.googleanalytics.getPageUrl('http://example.com/node/2'), "Full qualified external url 'http://example.com/node/2' has been extracted.");
+  Backdrop.googleanalytics.test.assertSame('https://example.com/node/2', Backdrop.googleanalytics.getPageUrl('https://example.com/node/2'), "Full qualified external url 'https://example.com/node/2' has been extracted.");
   Backdrop.googleanalytics.test.assertSame('//example.com/node/2', Backdrop.googleanalytics.getPageUrl('//example.com/node/2'), "Full qualified external url '//example.com/node/2' has been extracted.");
   console.groupEnd();
 

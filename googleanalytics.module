@@ -192,7 +192,7 @@ function googleanalytics_preprocess_layout() {
 
     // Track access denied (403) and file not found (404) pages.
     if ($status == '403 Forbidden') {
-      // See http://www.google.com/support/analytics/bin/answer.py?answer=86927
+      // See https://www.google.com/support/analytics/bin/answer.py?answer=86927
       $url_custom = '"' . $base_path . '403.html?page=" + document.location.pathname + document.location.search + "&from=" + document.referrer';
     }
     elseif ($status == '404 Not Found') {
@@ -492,7 +492,7 @@ function googleanalytics_preprocess_search_results(&$variables) {
 /**
  * Helper function for grabbing search keys. Function is missing in D7.
  *
- * http://api.drupal.org/api/function/search_get_keys/6
+ * https://api.drupal.org/api/function/search_get_keys/6
  */
 function googleanalytics_search_get_keys() {
   static $return;

@@ -524,7 +524,7 @@ class GoogleAnalyticsStatusMessagesTest extends BackdropWebTestCase {
     //backdrop_set_message('Example status message.', 'status');
     //backdrop_set_message('Example warning message.', 'warning');
     //backdrop_set_message('Example error message.', 'error');
-    //backdrop_set_message('Example error <em>message</em> with html tags and <a href="http://example.com/">link</a>.', 'error');
+    //backdrop_set_message('Example error <em>message</em> with html tags and <a href="https://example.com/">link</a>.', 'error');
     //$this->backdropGet('');
     //$this->assertNoRaw('ga("send", "event", "Messages", "Status message", "Example status message.");', '[testGoogleAnalyticsStatusMessages]: Example status message is not enabled for tracking.');
     //$this->assertNoRaw('ga("send", "event", "Messages", "Warning message", "Example warning message.");', '[testGoogleAnalyticsStatusMessages]: Example warning message is not enabled for tracking.');
