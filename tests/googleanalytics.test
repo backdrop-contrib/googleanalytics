@@ -484,10 +484,10 @@ class GoogleAnalyticsCustomUrls extends BackdropWebTestCase {
     $ua_code = 'UA-123456-4';
     config_set('googleanalytics.settings', 'account', $ua_code);
 
-    $this->backdropGet('user/password', ['query' => ['name' => 'foo']]);
+    $this->backdropGet('user/password', array('query' => array('name' => 'foo')));
     $this->assertRaw('ga("set", "page", "' . $base_path . 'user/password"');
 
-    $this->backdropGet('user/password', ['query' => ['name' => 'foo@example.com']]);
+    $this->backdropGet('user/password', array('query' => array('name' => 'foo@example.com')));
     $this->assertRaw('ga("set", "page", "' . $base_path . 'user/password"');
 
     $this->backdropGet('user/password');
