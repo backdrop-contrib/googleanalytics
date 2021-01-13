@@ -840,6 +840,7 @@ function _googleanalytics_validate_create_field_name($name) {
     'userId',
     'sampleRate',
     'siteSpeedSampleRate',
+    'useAmpClientId',
     'alwaysSendReferrer',
     'allowAnchor',
     'cookieName',
