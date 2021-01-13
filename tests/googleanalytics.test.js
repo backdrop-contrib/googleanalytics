@@ -107,9 +107,9 @@ $(document).ready(function() {
   if (Backdrop.settings.googleanalytics.trackCrossDomains) {
     console.dir(Backdrop.settings.googleanalytics.trackCrossDomains);
     Backdrop.googleanalytics.test.assertTrue(Backdrop.googleanalytics.isCrossDomain('example.com', Backdrop.settings.googleanalytics.trackCrossDomains), "URL 'example.com' has been found in cross domain list.");
-    Backdrop.googleanalytics.test.assertTrue(Backdrop.googleanalytics.isCrossDomain('example.net', Backdrop.settings.googleanalytics.trackCrossDomains), "URL 'example.com' has been found in cross domain list.");
+    Backdrop.googleanalytics.test.assertTrue(Backdrop.googleanalytics.isCrossDomain('example.net', Backdrop.settings.googleanalytics.trackCrossDomains), "URL 'example.net' has been found in cross domain list.");
     Backdrop.googleanalytics.test.assertFalse(Backdrop.googleanalytics.isCrossDomain('www.example.com', Backdrop.settings.googleanalytics.trackCrossDomains), "URL 'www.example.com' not found in cross domain list.");
-    Backdrop.googleanalytics.test.assertFalse(Backdrop.googleanalytics.isCrossDomain('www.example.net', Backdrop.settings.googleanalytics.trackCrossDomains), "URL 'www.example.com' not found in cross domain list.");
+    Backdrop.googleanalytics.test.assertFalse(Backdrop.googleanalytics.isCrossDomain('www.example.net', Backdrop.settings.googleanalytics.trackCrossDomains), "URL 'www.example.net' not found in cross domain list.");
   }
   else {
     console.warn('Cross domain tracking is not enabled. Tests skipped.');
