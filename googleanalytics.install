@@ -126,4 +126,5 @@ function googleanalytics_update_1002() {
  */
 function googleanalytics_update_1003() {
   config_set('googleanalytics.settings', 'disable_cookies', FALSE);
+  config_set('googleanalytics.settings', 'premium', FALSE);
 }
