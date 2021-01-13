@@ -96,7 +96,7 @@ class GoogleAnalyticsBasicTest extends BackdropWebTestCase {
     $this->assertNoRaw($ua_code, '[testGoogleAnalyticsPageVisibility]: Tracking code is not displayed on admin page.');
     $this->backdropGet('admin/config/system/googleanalytics');
     // Checking for tracking code URI here, as $ua_code is displayed in the form.
-    $this->assertRaw('https://www.google-analytics.com/analytics.js', '[testGoogleAnalyticsPageVisibility]: Tracking code is displayed on admin subpage.');
+    $this->assertNoRaw('https://www.google-analytics.com/analytics.js', '[testGoogleAnalyticsPageVisibility]: Tracking code is not displayed on admin subpage.');
 
     // Test whether tracking code display is properly flipped.
     config_set('googleanalytics.settings', 'visibility_pages', 1);
@@ -130,11 +130,12 @@ class GoogleAnalyticsBasicTest extends BackdropWebTestCase {
     $this->assertRaw($base_path . '404.html', '[testGoogleAnalyticsPageVisibility]: 404 Not Found tracking code shown on non-existent page.');
 
     // DNT Tests:
+    config_set('googleanalytics.settings', 'privacy_donottrack', 1);
     // Enable system internal page cache for anonymous users.
     config_set('system.core', 'cache', 1);
-    // Test whether DNT headers will fail to disable embedding of tracking code.
-    $this->backdropGet('', array(), array('DNT: 1'));
-    $this->assertRaw('ga("send", "pageview");', '[testGoogleAnalyticsDNTVisibility]: DNT header send from client, but page caching is enabled and tracker cannot removed.');
+    // DNT headers will fail to disable embedding of tracking code with cache set.
+    $this->backdropGet('home', array(), array('DNT: 1'));
+    $this->assertRaw('ga("send", "pageview");', '[testGoogleAnalyticsDNTVisibility]: DNT header sent from client, but page caching is enabled, so tracker cannot be removed.');
     // DNT works only with system internal page cache for anonymous users disabled.
     config_set('system.core', 'cache', 0);
     $this->backdropGet('');
@@ -580,6 +581,7 @@ class GoogleAnalyticsRolesTest extends BackdropWebTestCase {
     $this->assertRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is displayed for authenticated users only on frontpage.');
 
     $this->backdropLogout();
+    config_set('system.core', 'cache', 0);
     $this->backdropGet('');
     $this->assertNoRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is NOT displayed for anonymous users on frontpage.');
 

@@ -701,13 +701,16 @@ function _googleanalytics_visibility_pages() {
 }
 
 /**
- * Based on headers send by clients this function returns TRUE if GA code should
+ * Based on headers sent by clients this function returns TRUE if GA code should
  * be added to the current page and otherwise FALSE.
  */
 function _googleanalytics_visibility_header($account) {
-  if (($account->uid || config_get('system.core', 'cache') == 0) && config_get('googleanalytics.settings', 'privacy_donottrack') && !empty($_SERVER['HTTP_DNT'])) {
-    // Disable tracking if caching is disabled or a visitors is logged in and
-    // have opted out from tracking via DNT (Do-Not-Track) header.
+  $cache = config_get('system.core', 'cache');
+  $donottrack = config_get('googleanalytics.settings', 'privacy_donottrack');
+
+  if (($account->uid || $cache == 0) && $donottrack && !empty($_SERVER['HTTP_DNT'])) {
+    // Disable tracking if caching is disabled, or if a visitor is logged in and
+    // has opted out from tracking via DNT (Do-Not-Track) header.
     return FALSE;
   }
 

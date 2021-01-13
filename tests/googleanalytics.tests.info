@@ -11,8 +11,8 @@ group = Google Analytics
 file = googleanalytics.test
 
 [GoogleAnalyticsCustomUrls]
-name = Google Analytics status messages tests
-description = Test status messages functionality of Google Analytics module.
+name = Google Analytics custom url tests
+description = Test custom url functionality of Google Analytics module.
 group = Google Analytics
 file = googleanalytics.test
 
