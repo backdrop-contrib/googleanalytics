@@ -10,6 +10,12 @@ description = Test custom dimensions and metrics functionality of Google Analyti
 group = Google Analytics
 file = googleanalytics.test
 
+[GoogleAnalyticsCustomUrls]
+name = Google Analytics status messages tests
+description = Test status messages functionality of Google Analytics module.
+group = Google Analytics
+file = googleanalytics.test
+
 [GoogleAnalyticsStatusMessagesTest]
 name = Google Analytics status messages tests
 description = Test status messages functionality of Google Analytics module.
