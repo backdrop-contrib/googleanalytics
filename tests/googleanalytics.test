@@ -4,6 +4,7 @@
  * Test file for Google Analytics module.
  */
 class GoogleAnalyticsBasicTest extends BackdropWebTestCase {
+  protected $profile = 'standard';
 
   /**
    * User without permissions to edit snippets.
