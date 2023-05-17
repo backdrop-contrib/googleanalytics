@@ -327,7 +327,7 @@ function googleanalytics_preprocess_layout() {
       $create_only_fields['user_id'] = google_analytics_user_id_hash($user->uid);
     }
 
-    if ($config->get('tracker_anonymizeip', 1)) {
+    if ($config->get('tracker_anonymizeip')) {
       $create_only_fields['anonymize_ip'] = TRUE;
     }
     
