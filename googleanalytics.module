@@ -327,7 +327,7 @@ function googleanalytics_preprocess_layout() {
       $create_only_fields['user_id'] = google_analytics_user_id_hash($user->uid);
     }
 
-    if (variable_get('googleanalytics_tracker_anonymizeip', 1)) {
+    if ($config->get('tracker_anonymizeip', 1)) {
       $create_only_fields['anonymize_ip'] = TRUE;
     }
     
@@ -386,9 +386,9 @@ function googleanalytics_preprocess_layout() {
       // @FIXME: Cannot find the debug URL!???
       $library = 'https://www.googletagmanager.com/gtag/js?id=' . $id_list[0];
     }
-    elseif (variable_get('googleanalytics_cache', 0) && $url = _googleanalytics_cache('https://www.googletagmanager.com/gtag/js')) {
+    elseif ($config->get('googleanalytics_cache') && $url = _googleanalytics_cache('https://www.googletagmanager.com/gtag/js')) {
       // Should a local cached copy of gtag.js be used?
-      $query_string = '?' . variable_get('css_js_query_string', '0');
+      $query_string = '?' . state_get('css_js_query_string', '0');
       $library = $url . $query_string;
     }
     else {
