@@ -386,9 +386,9 @@ function googleanalytics_preprocess_layout() {
       // @FIXME: Cannot find the debug URL!???
       $library = 'https://www.googletagmanager.com/gtag/js?id=' . $id_list[0];
     }
-    elseif ($config->get('googleanalytics_cache') && $url = _googleanalytics_cache('https://www.googletagmanager.com/gtag/js')) {
+    elseif ($config->get('cache') && $url = _googleanalytics_cache('https://www.googletagmanager.com/gtag/js')) {
       // Should a local cached copy of gtag.js be used?
-      $query_string = '?' . state_get('css_js_query_string', '0');
+      $query_string = '?' . state_get('css_js_query_string', base_convert(REQUEST_TIME, 10, 36));
       $library = $url . $query_string;
     }
     else {
