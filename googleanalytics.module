@@ -282,7 +282,7 @@ function googleanalytics_preprocess_layout() {
       }
       $custom_var .= 'gtag("event", "custom", ' . backdrop_json_encode($custom_vars) . ');';
     };
-    
+
     // Build tracker code.
     $script = 'window.dataLayer = window.dataLayer || [];';
     $script .= 'function gtag(){dataLayer.push(arguments)};';
@@ -330,7 +330,7 @@ function googleanalytics_preprocess_layout() {
     if ($config->get('tracker_anonymizeip')) {
       $create_only_fields['anonymize_ip'] = TRUE;
     }
-    
+
     if (!empty($url_custom)) {
       $create_only_fields['page_path'] = 'PLACEHOLDER_URL_CUSTOM';
     }
@@ -351,7 +351,7 @@ function googleanalytics_preprocess_layout() {
     $arguments_json = backdrop_json_encode($create_only_fields);
     // backdrop_json_encode() cannot convert every data type properly.
     $arguments_json = str_replace('"PLACEHOLDER_URL_CUSTOM"', $url_custom, $arguments_json);
-    
+
     // Create a tracker.
     if (!empty($codesnippet_before)) {
       $script .= $codesnippet_before;
@@ -362,7 +362,7 @@ function googleanalytics_preprocess_layout() {
 
     // Prepare Adsense tracking.
     $googleanalytics_adsense_script .= 'window.google_analytics_uacct = ' . backdrop_json_encode($id_list[0]) . ';';
-  
+
     if (!empty($custom_var)) {
       $script .= $custom_var;
     }
