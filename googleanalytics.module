@@ -241,6 +241,11 @@ function googleanalytics_preprocess_layout() {
       if (!empty($googleanalytics_custom_vars)) {
         // Add all the configured variables to the content.
         foreach ($googleanalytics_custom_vars as $googleanalytics_custom_var) {
+          // Suppress empty values.
+          if (!backdrop_strlen(trim($googleanalytics_custom_var['value']))) {
+            continue;
+          }
+
           // Replace tokens in values.
           $types = array();
           $node = menu_get_object();
@@ -248,11 +253,6 @@ function googleanalytics_preprocess_layout() {
             $types += array('node' => $node);
           }
           $googleanalytics_custom_var['value'] = token_replace($googleanalytics_custom_var['value'], $types, array('clear' => TRUE));
-
-          // Suppress empty values.
-          if (!backdrop_strlen(trim($googleanalytics_custom_var['value']))) {
-            continue;
-          }
 
           // Per documentation the max length of a dimension is 150 bytes.
           // A metric has no length limitation. It's not documented if this
