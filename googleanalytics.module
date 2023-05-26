@@ -469,7 +469,7 @@ function googleanalytics_form_user_profile_form_alter(&$form, &$form_state) {
       $disabled = TRUE;
 
       // Override settings value.
-      $account->data['googleanalytics']['custom'] = FALSE;
+      $account->data['googleanalytics'] = array('custom' => FALSE);
 
       $description .= '<span class="admin-disabled">';
       $description .= ' ' . t('You have opted out from tracking via browser privacy settings.');
